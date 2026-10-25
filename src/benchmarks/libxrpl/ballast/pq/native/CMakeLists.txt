@@ -400,3 +400,7 @@ add_subdirectory(
     "${BALLAST_ROOT}/src/benchmarks/libxrpl/ballast/measurement"
     measurement
 )
+add_subdirectory(
+    "${BALLAST_ROOT}/src/benchmarks/libxrpl/ballast/retention"
+    retention
+)

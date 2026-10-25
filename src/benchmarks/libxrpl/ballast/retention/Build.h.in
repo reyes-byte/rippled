@@ -1,0 +1,6 @@
+#pragma once
+
+namespace ballast::retention::build {
+inline constexpr char sourceHash[] = "@retention_source_hash@";
+inline constexpr char dependencyHash[] = "@retention_dependency_hash@";
+}

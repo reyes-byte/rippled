@@ -58,3 +58,10 @@ Run `bash bin/ballast-dashboard --compare` to validate and import that experimen
 into the C++ comparison view. `stblob-move-dashboard.json` is the saved import;
 opening it with `--data` performs structural checks without revalidating raw CSVs.
 Each variant retains its own source fingerprints and 164 recorded passing tests.
+
+`retention-experiment.zip` records a separate repeated-fixture workload holding
+1/10/100/1000 parsed transactions and independent wire copies alive together.
+The 1000-object, 32-signer ML-DSA-44 case held 251736000 tracked bytes (about
+240.1 MiB) in both variants; cleanup returned tracked live bytes to zero.
+This is not node RSS or a real queue of unique transactions. See the
+[retention guide](../../src/benchmarks/libxrpl/ballast/retention/README.md).
