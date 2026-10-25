@@ -112,6 +112,7 @@ words:
   - determ
   - disablerepo
   - distro
+  - DNDEBUG
   - doxyfile
   - dsymutil
   - dxrpl
@@ -137,6 +138,7 @@ words:
   - godexsoft
   - gpgcheck
   - gpgkey
+  - hackathon
   - Hinnant
   - hotwallet
   - hwaddress
@@ -373,6 +375,7 @@ words:
   - vinnie
   - wasmi
   - wextra
+  - Wpedantic
   - wptr
   - writeme
   - wsrch

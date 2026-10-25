@@ -79,6 +79,19 @@ The defaults use two build jobs. If Nix fails to create a private mount
 namespace, use a host/session with working Nix permissions; no native build
 was validated outside the required devshell.
 
+## Browse the saved baseline in a C++ terminal dashboard
+
+```sh
+bash bin/ballast-dashboard
+```
+
+The launcher builds the viewer inside Nix. Use `1`/`2`/`3` for stages, `m` for
+metrics, `r` for runs, `j`/`k` to select a row, `p` for provenance, and `q` to
+quit. `--plain` prints a static display. The viewer reads recorded observations;
+it does not rerun native tests, verify CSVs, or measure the node. See the
+[dashboard guide](src/benchmarks/libxrpl/ballast/dashboard/README.md) for its
+C++ execution flow and data boundaries.
+
 ## What the numbers mean
 
 The saved baseline passed 155 tests and contains 1620 validated samples.
@@ -87,9 +100,9 @@ instrumented timings varied. Examples for 32 signers, in tracked requested
 C++ bytes:
 
 | Algorithm | Parse peak | Live after parse | Verify-only peak |
-| --- | ---: | ---: | ---: |
-| secp256k1 | 25307 | 15003 | 529 |
-| ML-DSA-44 | 312232 | 131120 | 4138 |
+| --------- | ---------: | ---------------: | ---------------: |
+| secp256k1 |      25307 |            15003 |              529 |
+| ML-DSA-44 |     312232 |           131120 |             4138 |
 
 For ML-DSA-44, a signer signs 50 common bytes plus its 20-byte AccountID even
 though the 32-signer wire transaction occupies 120464 bytes. Signers are

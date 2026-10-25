@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+set -euo pipefail
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then
+    exec nix develop "${repo_dir}#gcc" --command bash "$repo_dir/bin/ballast-dashboard" "$@"
+fi
+cd "$repo_dir"
+work_dir="$repo_dir/build/ballast-dashboard"
+toolchain="$repo_dir/build/ballast-protocol/conan_toolchain.cmake"
+if [[ ! -f "$toolchain" ]]; then
+    conan install src/benchmarks/libxrpl/ballast --output-folder "$work_dir/dependencies" \
+        --lockfile conan.lock --build missing --settings build_type=Release \
+        --settings:build build_type=Release --conf tools.build:jobs=2 --conf:build tools.build:jobs=2 >&2
+    toolchain="$work_dir/dependencies/conan_toolchain.cmake"
+fi
+cmake -S src/benchmarks/libxrpl/ballast/dashboard -B "$work_dir" \
+    -DCMAKE_TOOLCHAIN_FILE="$toolchain" -DCMAKE_BUILD_TYPE=Release >&2
+cmake --build "$work_dir" --target ballast_dashboard --parallel 2 >&2
+exec "$work_dir/ballast_dashboard" "$@"

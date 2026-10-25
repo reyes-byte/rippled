@@ -1,0 +1,2319 @@
+{
+  "schema_version": 1,
+  "source_bundle_sha256": "7c404921e7a37de69ed7603f0e35684c7dabfc1279a4d4b3b66c46bfb0910a17",
+  "recorded_tests_passed": 155,
+  "metadata": {
+    "build_flags": "-m64 -O3 -DNDEBUG; std=c++23; protocol_unity=ON; unity_batch=15; measurement_ipo=OFF",
+    "build_scope": "candidate_protocol_source_subset",
+    "build_type": "Release",
+    "candidate_commit": "779859c8afa324d34d16e42028af8d2ceb5fcc8e",
+    "compiler_id": "GNU",
+    "compiler_version": "15.3.0",
+    "coverage": "global_cpp_new_delete_requested_bytes",
+    "crypto_commit": "3032292cfd4d94e0df9bd49a0098669ca9166aa1",
+    "dependency_manifest_sha256": "a9b60feab86c7eb752817eea7f6074eda028a1e0b0384d6ff34a333fcf2df8f4",
+    "fee_validation": "not_checked",
+    "input_storage": "excluded",
+    "ledger_authorization": "not_checked",
+    "measurement_source_sha256": "6e67d4f9f7f36309af7185e45acf3827315a8bf321ae126de5c44b9ffe60150a",
+    "node_wide_lower_bound": false,
+    "openssl_version": "OpenSSL 3.6.3 9 Jun 2026",
+    "rss": "not_measured",
+    "run_id": "run-1",
+    "samples_per_fixture_stage": 30,
+    "schema_version": 1,
+    "timing": "instrumented_diagnostic_excludes_parsed_cleanup; not production throughput",
+    "tracker_metadata": "excluded",
+    "warmup_iterations_per_fixture_stage": 3
+  },
+  "views": [
+    {
+      "id": "all",
+      "summary": {
+        "schema_version": 1,
+        "validated_files": 3,
+        "rows": 1620,
+        "coverage": "global_cpp_new_delete_requested_bytes",
+        "input_storage": "excluded",
+        "rss": "not_measured",
+        "timing": "instrumented_diagnostic",
+        "groups": [
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 35653,
+              "median": 35653.0,
+              "max": 35653,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 29407,
+              "median": 30380.0,
+              "max": 35312,
+              "population_stddev": 759.8879775302815
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 40031,
+              "median": 40031.0,
+              "max": 40031,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 291349,
+              "median": 301908.0,
+              "max": 390870,
+              "population_stddev": 14144.522632257493
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 4378,
+              "median": 4378.0,
+              "max": 4378,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 262584,
+              "median": 272152.5,
+              "max": 326770,
+              "population_stddev": 13035.064568645812
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 220081,
+              "median": 220081.0,
+              "max": 220081,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 188109,
+              "median": 191268.0,
+              "max": 267502,
+              "population_stddev": 12112.89173795556
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 251633,
+              "median": 251633.0,
+              "max": 251633,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2300319,
+              "median": 2340949.0,
+              "max": 2422108,
+              "population_stddev": 25593.690946350118
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 31552,
+              "median": 31552.0,
+              "max": 31552,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2097947,
+              "median": 2145202.5,
+              "max": 2283247,
+              "population_stddev": 31790.279960289437
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 877665,
+              "median": 877665.0,
+              "max": 877665,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 739625,
+              "median": 757206.5,
+              "max": 843058,
+              "population_stddev": 20358.939945359765
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 1002385,
+              "median": 1002385.0,
+              "max": 1002385,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 9204738,
+              "median": 9392165.5,
+              "max": 10880908,
+              "population_stddev": 176507.2432830246
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 124720,
+              "median": 124720.0,
+              "max": 124720,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 8468956,
+              "median": 8568516.0,
+              "max": 9558509,
+              "population_stddev": 143586.6893730443
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 5664,
+              "median": 5664.0,
+              "max": 5664,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 10416,
+              "median": 10874.0,
+              "max": 19163,
+              "population_stddev": 1374.2976747738785
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 6550,
+              "median": 6550.0,
+              "max": 6550,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 126031,
+              "median": 130564.0,
+              "max": 166161,
+              "population_stddev": 5440.048830856095
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 886,
+              "median": 886.0,
+              "max": 886,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 115560,
+              "median": 118521.0,
+              "max": 158126,
+              "population_stddev": 5917.313204111774
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 20710,
+              "median": 20710.0,
+              "max": 20710,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 39319,
+              "median": 40464.5,
+              "max": 59542,
+              "population_stddev": 3585.5597522442126
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 24314,
+              "median": 24314.0,
+              "max": 24314,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 970611,
+              "median": 986626.5,
+              "max": 1033252,
+              "population_stddev": 12915.002232111
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 3604,
+              "median": 3604.0,
+              "max": 3604,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 920952,
+              "median": 947133.5,
+              "max": 1062667,
+              "population_stddev": 21274.604213161445
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 72043,
+              "median": 72043.0,
+              "max": 72043,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 139069,
+              "median": 143003.5,
+              "max": 175392,
+              "population_stddev": 6662.876368902845
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 84956,
+              "median": 84956.0,
+              "max": 84956,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 4011306,
+              "median": 4096236.5,
+              "max": 4385977,
+              "population_stddev": 82622.95270204025
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 90,
+            "requested_bytes": {
+              "min": 12913,
+              "median": 12913.0,
+              "max": 12913,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 3856647,
+              "median": 3935054.5,
+              "max": 4119336,
+              "population_stddev": 56376.157724966026
+            },
+            "allocation_metric_variants": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "run-1",
+      "summary": {
+        "schema_version": 1,
+        "validated_files": 1,
+        "rows": 540,
+        "coverage": "global_cpp_new_delete_requested_bytes",
+        "input_storage": "excluded",
+        "rss": "not_measured",
+        "timing": "instrumented_diagnostic",
+        "groups": [
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 35653,
+              "median": 35653.0,
+              "max": 35653,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 29407,
+              "median": 30153.5,
+              "max": 31292,
+              "population_stddev": 465.2011703434213
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 40031,
+              "median": 40031.0,
+              "max": 40031,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 291349,
+              "median": 302422.5,
+              "max": 314226,
+              "population_stddev": 5283.017368154512
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 4378,
+              "median": 4378.0,
+              "max": 4378,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 262687,
+              "median": 272748.5,
+              "max": 281732,
+              "population_stddev": 5236.766440806345
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 220081,
+              "median": 220081.0,
+              "max": 220081,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 188562,
+              "median": 190944.0,
+              "max": 199753,
+              "population_stddev": 2902.4987020764634
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 251633,
+              "median": 251633.0,
+              "max": 251633,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2311499,
+              "median": 2332880.5,
+              "max": 2375703,
+              "population_stddev": 19299.03962193168
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 31552,
+              "median": 31552.0,
+              "max": 31552,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2113774,
+              "median": 2135975.5,
+              "max": 2173249,
+              "population_stddev": 16957.44091873011
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 877665,
+              "median": 877665.0,
+              "max": 877665,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 739625,
+              "median": 752556.0,
+              "max": 784837,
+              "population_stddev": 11975.556034226089
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 1002385,
+              "median": 1002385.0,
+              "max": 1002385,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 9282253,
+              "median": 9369059.5,
+              "max": 9513182,
+              "population_stddev": 51416.55920011459
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 124720,
+              "median": 124720.0,
+              "max": 124720,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 8472156,
+              "median": 8549827.5,
+              "max": 9558509,
+              "population_stddev": 190679.70878848704
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 5664,
+              "median": 5664.0,
+              "max": 5664,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 10518,
+              "median": 10861.5,
+              "max": 18994,
+              "population_stddev": 1503.5757764594225
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 6550,
+              "median": 6550.0,
+              "max": 6550,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 126031,
+              "median": 130791.5,
+              "max": 139987,
+              "population_stddev": 3563.25555340743
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 886,
+              "median": 886.0,
+              "max": 886,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 116358,
+              "median": 119304.0,
+              "max": 129587,
+              "population_stddev": 3032.4446566352294
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 20710,
+              "median": 20710.0,
+              "max": 20710,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 39380,
+              "median": 40802.5,
+              "max": 51945,
+              "population_stddev": 2410.0651775418855
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 24314,
+              "median": 24314.0,
+              "max": 24314,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 974595,
+              "median": 983706.0,
+              "max": 1007788,
+              "population_stddev": 7382.884386350786
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 3604,
+              "median": 3604.0,
+              "max": 3604,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 928087,
+              "median": 944380.0,
+              "max": 952804,
+              "population_stddev": 5106.634695396003
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 72043,
+              "median": 72043.0,
+              "max": 72043,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 139486,
+              "median": 143090.0,
+              "max": 154526,
+              "population_stddev": 4065.347717258909
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 84956,
+              "median": 84956.0,
+              "max": 84956,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 4011306,
+              "median": 4043215.0,
+              "max": 4249222,
+              "population_stddev": 45093.19926207154
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 12913,
+              "median": 12913.0,
+              "max": 12913,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 3861306,
+              "median": 3908663.0,
+              "max": 4051454,
+              "population_stddev": 37903.74915733564
+            },
+            "allocation_metric_variants": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "run-2",
+      "summary": {
+        "schema_version": 1,
+        "validated_files": 1,
+        "rows": 540,
+        "coverage": "global_cpp_new_delete_requested_bytes",
+        "input_storage": "excluded",
+        "rss": "not_measured",
+        "timing": "instrumented_diagnostic",
+        "groups": [
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 35653,
+              "median": 35653.0,
+              "max": 35653,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 29696,
+              "median": 30325.5,
+              "max": 35312,
+              "population_stddev": 950.1469336663438
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 40031,
+              "median": 40031.0,
+              "max": 40031,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 293226,
+              "median": 300568.0,
+              "max": 332681,
+              "population_stddev": 10195.403310424861
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 4378,
+              "median": 4378.0,
+              "max": 4378,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 262584,
+              "median": 272746.5,
+              "max": 305793,
+              "population_stddev": 11879.111892730029
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 220081,
+              "median": 220081.0,
+              "max": 220081,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 189064,
+              "median": 192198.0,
+              "max": 267502,
+              "population_stddev": 14979.261664789163
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 251633,
+              "median": 251633.0,
+              "max": 251633,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2300319,
+              "median": 2340949.0,
+              "max": 2405647,
+              "population_stddev": 24616.470883649337
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 31552,
+              "median": 31552.0,
+              "max": 31552,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2101183,
+              "median": 2145939.0,
+              "max": 2210055,
+              "population_stddev": 23951.659486557503
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 877665,
+              "median": 877665.0,
+              "max": 877665,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 741495,
+              "median": 768464.5,
+              "max": 830788,
+              "population_stddev": 21592.989260920363
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 1002385,
+              "median": 1002385.0,
+              "max": 1002385,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 9250922,
+              "median": 9414443.5,
+              "max": 9750304,
+              "population_stddev": 91733.256721843
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 124720,
+              "median": 124720.0,
+              "max": 124720,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 8468956,
+              "median": 8582944.5,
+              "max": 9343560,
+              "population_stddev": 147619.96505861485
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 5664,
+              "median": 5664.0,
+              "max": 5664,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 10416,
+              "median": 11016.5,
+              "max": 19163,
+              "population_stddev": 1485.350252746245
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 6550,
+              "median": 6550.0,
+              "max": 6550,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 128446,
+              "median": 130019.5,
+              "max": 140913,
+              "population_stddev": 3325.0871515729564
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 886,
+              "median": 886.0,
+              "max": 886,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 115560,
+              "median": 118404.5,
+              "max": 131719,
+              "population_stddev": 3930.544689423535
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 20710,
+              "median": 20710.0,
+              "max": 20710,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 39319,
+              "median": 40136.0,
+              "max": 58965,
+              "population_stddev": 4168.900907779997
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 24314,
+              "median": 24314.0,
+              "max": 24314,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 970611,
+              "median": 983878.5,
+              "max": 997133,
+              "population_stddev": 6768.3912679946825
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 3604,
+              "median": 3604.0,
+              "max": 3604,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 933384,
+              "median": 944786.0,
+              "max": 970074,
+              "population_stddev": 8810.612285697793
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 72043,
+              "median": 72043.0,
+              "max": 72043,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 139767,
+              "median": 142360.0,
+              "max": 155213,
+              "population_stddev": 4076.6125296214586
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 84956,
+              "median": 84956.0,
+              "max": 84956,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 4037638,
+              "median": 4103302.5,
+              "max": 4356473,
+              "population_stddev": 68988.40171201888
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 12913,
+              "median": 12913.0,
+              "max": 12913,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 3856647,
+              "median": 3913385.0,
+              "max": 3981939,
+              "population_stddev": 29521.556893677993
+            },
+            "allocation_metric_variants": 1
+          }
+        ]
+      }
+    },
+    {
+      "id": "run-3",
+      "summary": {
+        "schema_version": 1,
+        "validated_files": 1,
+        "rows": 540,
+        "coverage": "global_cpp_new_delete_requested_bytes",
+        "input_storage": "excluded",
+        "rss": "not_measured",
+        "timing": "instrumented_diagnostic",
+        "groups": [
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 35653,
+              "median": 35653.0,
+              "max": 35653,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 29870,
+              "median": 30477.5,
+              "max": 32633,
+              "population_stddev": 685.8140021576955
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 40031,
+              "median": 40031.0,
+              "max": 40031,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 18137,
+              "median": 18137.0,
+              "max": 18137,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 6500,
+              "median": 6500.0,
+              "max": 6500,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 292183,
+              "median": 301720.5,
+              "max": 390870,
+              "population_stddev": 20863.903201462566
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 4378,
+              "median": 4378.0,
+              "max": 4378,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 262735,
+              "median": 271366.0,
+              "max": 326770,
+              "population_stddev": 17637.64507841742
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 220081,
+              "median": 220081.0,
+              "max": 220081,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 188109,
+              "median": 192732.0,
+              "max": 226468,
+              "population_stddev": 13019.012848778768
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 251633,
+              "median": 251633.0,
+              "max": 251633,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 80284,
+              "median": 80284.0,
+              "max": 80284,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 34640,
+              "median": 34640.0,
+              "max": 34640,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2310740,
+              "median": 2346939.0,
+              "max": 2422108,
+              "population_stddev": 29576.786666442014
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 31552,
+              "median": 31552.0,
+              "max": 31552,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 2097947,
+              "median": 2153117.0,
+              "max": 2283247,
+              "population_stddev": 43196.596540841296
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 877665,
+              "median": 877665.0,
+              "max": 877665,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 740409,
+              "median": 754237.0,
+              "max": 843058,
+              "population_stddev": 22715.29105827663
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 1002385,
+              "median": 1002385.0,
+              "max": 1002385,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 312232,
+              "median": 312232.0,
+              "max": 312232,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 131120,
+              "median": 131120.0,
+              "max": 131120,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 9204738,
+              "median": 9407098.0,
+              "max": 10880908,
+              "population_stddev": 278599.8069863832
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "ML-DSA-44",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 124720,
+              "median": 124720.0,
+              "max": 124720,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 4138,
+              "median": 4138.0,
+              "max": 4138,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 8477031,
+              "median": 8566893.5,
+              "max": 8705483,
+              "population_stddev": 57101.56022779841
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 5664,
+              "median": 5664.0,
+              "max": 5664,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 10422,
+              "median": 10748.5,
+              "max": 16607,
+              "population_stddev": 1079.4061850027645
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 6550,
+              "median": 6550.0,
+              "max": 6550,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 3512,
+              "median": 3512.0,
+              "max": 3512,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 2872,
+              "median": 2872.0,
+              "max": 2872,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 127143,
+              "median": 130564.0,
+              "max": 166161,
+              "population_stddev": 7916.3358926687515
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 1,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 886,
+              "median": 886.0,
+              "max": 886,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 115789,
+              "median": 117553.5,
+              "max": 158126,
+              "population_stddev": 8951.224160601349
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 20710,
+              "median": 20710.0,
+              "max": 20710,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 39728,
+              "median": 40688.5,
+              "max": 59542,
+              "population_stddev": 3899.7734378636237
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 24314,
+              "median": 24314.0,
+              "max": 24314,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 8430,
+              "median": 8430.0,
+              "max": 8430,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 5612,
+              "median": 5612.0,
+              "max": 5612,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 980844,
+              "median": 1001198.5,
+              "max": 1033252,
+              "population_stddev": 14269.09074748633
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 8,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 3604,
+              "median": 3604.0,
+              "max": 3604,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 920952,
+              "median": 962403.5,
+              "max": 1062667,
+              "population_stddev": 29653.995863570675
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 72043,
+              "median": 72043.0,
+              "max": 72043,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 139069,
+              "median": 143129.0,
+              "max": 175392,
+              "population_stddev": 9669.220253751362
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "parse_verify",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 84956,
+              "median": 84956.0,
+              "max": 84956,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 25307,
+              "median": 25307.0,
+              "max": 25307,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 15003,
+              "median": 15003.0,
+              "max": 15003,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 4072978,
+              "median": 4153495.0,
+              "max": 4385977,
+              "population_stddev": 81633.5128070982
+            },
+            "allocation_metric_variants": 1
+          },
+          {
+            "algorithm": "secp256k1",
+            "signer_count": 32,
+            "stage": "verify_only",
+            "samples": 30,
+            "requested_bytes": {
+              "min": 12913,
+              "median": 12913.0,
+              "max": 12913,
+              "population_stddev": 0.0
+            },
+            "peak_live_bytes": {
+              "min": 529,
+              "median": 529.0,
+              "max": 529,
+              "population_stddev": 0.0
+            },
+            "live_bytes_at_operation_end": {
+              "min": 0,
+              "median": 0.0,
+              "max": 0,
+              "population_stddev": 0.0
+            },
+            "elapsed_ns": {
+              "min": 3891566,
+              "median": 3997219.0,
+              "max": 4119336,
+              "population_stddev": 54288.75156892284
+            },
+            "allocation_metric_variants": 1
+          }
+        ]
+      }
+    }
+  ]
+}
