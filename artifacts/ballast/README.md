@@ -47,3 +47,14 @@ is made. No ledger network submissions were performed.
 See [HANDOFF.md](../../HANDOFF.md) for the one-command reproduction workflow.
 The ZIP is intentionally stored as a single file so text formatters do not
 rewrite fingerprinted CSV/JSON/fixture bytes inside a recorded snapshot.
+
+`stblob-move-experiment.zip` is a separate before/after experiment. The move
+constructor reduced 32-signer ML-DSA-44 parse allocation requests by 22.43%,
+with no reduction in peak or operation-end live bytes. It includes both sets
+of raw results and their source fingerprints; its README describes offline
+checking. See the [experiment guide](../../src/benchmarks/libxrpl/ballast/pq/native/STBLOB_MOVE.md).
+
+Run `bash bin/ballast-dashboard --compare` to validate and import that experiment
+into the C++ comparison view. `stblob-move-dashboard.json` is the saved import;
+opening it with `--data` performs structural checks without revalidating raw CSVs.
+Each variant retains its own source fingerprints and 164 recorded passing tests.

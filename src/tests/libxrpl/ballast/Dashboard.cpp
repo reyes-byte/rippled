@@ -6,6 +6,7 @@
 
 #include <unistd.h>
 
+#include <algorithm>
 #include <filesystem>
 #include <fstream>
 #include <iterator>
@@ -190,6 +191,142 @@ TEST(BallastDashboard, malformed_or_incomplete_input_is_rejected)
     EXPECT_THROW(loadSnapshot(temporary.path), std::exception);
     data = source();
     data.at("views").as_array()[0].at("summary").at("groups").as_array().pop_back();
+    std::ofstream(temporary.path) << data;
+    EXPECT_THROW(loadSnapshot(temporary.path), std::exception);
+}
+
+Snapshot
+comparison()
+{
+    return loadSnapshot(BALLAST_DASHBOARD_COMPARISON_DATA);
+}
+
+boost::json::value
+comparisonSource()
+{
+    std::ifstream input(BALLAST_DASHBOARD_COMPARISON_DATA);
+    return boost::json::parse(std::string(std::istreambuf_iterator<char>(input), {}));
+}
+
+TEST(BallastDashboardComparison, imports_separate_statistics_and_provenance)
+{
+    auto const data = comparison();
+    ASSERT_TRUE(data.comparison);
+    ASSERT_EQ(data.views.size(), 2);
+    EXPECT_EQ(data.views[0].rows, 1620);
+    EXPECT_EQ(data.views[1].rows, 1620);
+    EXPECT_EQ(data.comparison->provenance[0].recordedTests, 164);
+    EXPECT_EQ(data.comparison->provenance[1].recordedTests, 164);
+    EXPECT_NE(
+        data.comparison->provenance[0].dependencyHash,
+        data.comparison->provenance[1].dependencyHash);
+    auto const rows = comparisonGroups(data, State{});
+    ASSERT_EQ(rows.size(), 6);
+    auto const [before, after] = rows.back();
+    EXPECT_EQ(before->metrics[1].median, 877665);
+    EXPECT_EQ(after->metrics[1].median, 680801);
+    EXPECT_EQ(before->allocationCalls->median, 598);
+    EXPECT_EQ(after->allocationCalls->median, 502);
+    EXPECT_EQ(before->samples, 90);
+    EXPECT_EQ(after->samples, 90);
+}
+
+TEST(BallastDashboardComparison, matches_identities_instead_of_array_positions)
+{
+    auto data = comparison();
+    std::reverse(data.views[1].groups.begin(), data.views[1].groups.end());
+    for (auto const& [before, after] : comparisonGroups(data, State{}))
+    {
+        EXPECT_EQ(before->algorithm, after->algorithm);
+        EXPECT_EQ(before->signers, after->signers);
+        EXPECT_EQ(before->stage, after->stage);
+    }
+}
+
+TEST(BallastDashboardComparison, differences_distinguish_savings_regressions_and_zero_baselines)
+{
+    auto const saved = difference(100, 75);
+    EXPECT_EQ(saved.saved, 25);
+    EXPECT_EQ(saved.percent, 25);
+    auto const regression = difference(100, 125);
+    EXPECT_EQ(regression.saved, -25);
+    EXPECT_EQ(regression.percent, -25);
+    EXPECT_EQ(difference(0, 0).percent, 0);
+    EXPECT_FALSE(difference(0, 5).percent.has_value());
+}
+
+TEST(BallastDashboardComparison, render_shows_savings_and_unchanged_peak_in_small_terminal)
+{
+    State state;
+    state.metric = 1;
+    auto const lines = render(comparison(), state, 80, 24);
+    EXPECT_TRUE(contains(lines, "22.4% less"));
+    EXPECT_TRUE(contains(lines, "Peak 312232 B -> 312232 B | unchanged"));
+    EXPECT_TRUE(contains(lines, "Calls 598 -> 502 | 16.1% less"));
+    EXPECT_TRUE(contains(lines, "Tests B:164 O:164 recorded"));
+    EXPECT_TRUE(contains(lines, "NOT node RSS"));
+    EXPECT_TRUE(contains(lines, "not rerun"));
+    EXPECT_LE(lines.size(), 24);
+    for (auto const& line : lines)
+        EXPECT_LE(line.size(), 79);
+}
+
+TEST(BallastDashboardComparison, render_marks_regressions_as_more_and_keeps_verify_boundary)
+{
+    auto data = comparison();
+    for (auto& group : data.views[1].groups)
+        if (group.algorithm == "ML-DSA-44" && group.signers == 32 && group.stage == "parse_only")
+            group.metrics[1] = {900000, 900000, 900000};
+    State state;
+    state.metric = 1;
+    EXPECT_TRUE(contains(render(data, state), "2.5% more"));
+    state.stage = 1;
+    EXPECT_TRUE(contains(render(data, state), "pre-parsed transaction excluded"));
+}
+
+TEST(BallastDashboardComparison, source_navigation_uses_each_datasets_own_provenance)
+{
+    auto data = comparison();
+    data.comparison->provenance[0].recordedTests = 155;
+    State state;
+    state.provenance = true;
+    EXPECT_TRUE(contains(render(data, state), "Tests B:155 O:164 recorded"));
+    EXPECT_TRUE(contains(render(data, state), "stblob_move=OFF"));
+    state.handle('r', data.views.size());
+    auto const lines = render(data, state);
+    EXPECT_TRUE(contains(lines, "PROVENANCE: Move constructor"));
+    EXPECT_TRUE(contains(lines, "stblob_move=ON"));
+    EXPECT_TRUE(contains(lines, data.comparison->provenance[1].dependencyHash));
+}
+
+TEST(BallastDashboardComparison, incompatible_configuration_and_fixtures_are_rejected)
+{
+    TemporaryJson temporary;
+    for (auto key : {"compiler_version", "build_flags"})
+    {
+        auto data = comparisonSource();
+        data.at("datasets").as_array()[1].at("metadata").as_object()[key] = "changed";
+        std::ofstream(temporary.path) << data;
+        EXPECT_THROW(loadSnapshot(temporary.path), std::exception);
+    }
+    auto data = comparisonSource();
+    data.at("datasets").as_array()[1].at("fixture_sha256").as_object().begin()->value() =
+        "different";
+    std::ofstream(temporary.path) << data;
+    EXPECT_THROW(loadSnapshot(temporary.path), std::exception);
+}
+
+TEST(BallastDashboardComparison, missing_allocation_calls_are_not_invented)
+{
+    TemporaryJson temporary;
+    auto data = comparisonSource();
+    data.at("datasets")
+        .as_array()[0]
+        .at("summary")
+        .at("groups")
+        .as_array()[0]
+        .as_object()
+        .erase("allocation_calls");
     std::ofstream(temporary.path) << data;
     EXPECT_THROW(loadSnapshot(temporary.path), std::exception);
 }

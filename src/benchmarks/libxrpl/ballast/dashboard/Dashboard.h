@@ -3,7 +3,9 @@
 #include <array>
 #include <cstddef>
 #include <filesystem>
+#include <optional>
 #include <string>
+#include <utility>
 #include <vector>
 
 namespace ballast::dashboard {
@@ -30,6 +32,7 @@ struct Group
     std::size_t samples;
     std::array<Statistic, 4> metrics;
     std::size_t variants;
+    std::optional<Statistic> allocationCalls;
 };
 
 struct View
@@ -38,6 +41,30 @@ struct View
     std::size_t runs;
     std::size_t rows;
     std::vector<Group> groups;
+};
+
+struct Provenance
+{
+    std::string candidate;
+    std::string crypto;
+    std::string measurementHash;
+    std::string dependencyHash;
+    std::string flags;
+    std::string compiler;
+    std::string openssl;
+    std::size_t recordedTests;
+};
+
+struct Comparison
+{
+    std::string label;
+    std::array<Provenance, 2> provenance;
+};
+
+struct Difference
+{
+    double saved;
+    std::optional<double> percent;
 };
 
 struct Snapshot
@@ -50,6 +77,7 @@ struct Snapshot
     std::string openssl;
     std::string sourceBundleHash;
     std::size_t recordedTests = 0;
+    std::optional<Comparison> comparison;
 };
 
 struct State
@@ -69,6 +97,16 @@ Snapshot
 loadSnapshot(std::filesystem::path const& path);
 std::vector<Group const*>
 visibleGroups(Snapshot const& snapshot, State const& state);
+std::vector<std::pair<Group const*, Group const*>>
+comparisonGroups(Snapshot const& snapshot, State const& state);
+Difference
+difference(double baseline, double optimized);
+std::vector<std::string>
+renderComparison(
+    Snapshot const& snapshot,
+    State const& state,
+    std::size_t width,
+    std::size_t height);
 std::string
 safeText(std::string text);
 std::string

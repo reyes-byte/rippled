@@ -24,6 +24,10 @@ public:
 
     STBlob() = default;
     STBlob(STBlob const& rhs);
+    STBlob(STBlob&& rhs) noexcept;
+
+    STBlob&
+    operator=(STBlob const&) = default;
 
     STBlob(SField const& f, void const* data, std::size_t size);
     STBlob(SField const& f, Buffer&& b);
@@ -74,6 +78,11 @@ private:
 
 inline STBlob::STBlob(STBlob const& rhs)
     : STBase(rhs), CountedObject<STBlob>(rhs), value_(rhs.data(), rhs.size())
+{
+}
+
+inline STBlob::STBlob(STBlob&& rhs) noexcept
+    : STBase(rhs), CountedObject<STBlob>(rhs), value_(std::move(rhs.value_))
 {
 }
 

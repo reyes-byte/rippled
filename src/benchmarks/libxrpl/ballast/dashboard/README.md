@@ -32,6 +32,62 @@ inside `nix develop .#gcc` to skip the launcher's configure/build check.
 | `p`                  | Toggle recorded provenance                                        |
 | `q`, Ctrl-C, Ctrl-D  | Exit and restore terminal settings                                |
 
+## Import and compare optimization results
+
+```sh
+bash bin/ballast-dashboard --compare
+bash bin/ballast-dashboard --compare --plain
+bash bin/ballast-dashboard --compare --provenance
+```
+
+`--compare` imports `artifacts/ballast/stblob-move-experiment.zip` by default.
+An explicit archive path can follow the flag. This first importer supports the
+recorded STBlob experiment archive layout and the pinned six-fixture corpus.
+It does not import arbitrary CSV formats or combine different fixture sets.
+
+The launcher runs the standard-library Python import helper, which reuses the
+existing CSV validator. It checks archive inventory/checksums, pins the validator
+and fixture corpus, validates each variant's CSVs/sidecars, recomputes summaries,
+and checks compiled dependency-manifest hashes. It reads recorded passing test
+counts from each variant's CTest log. It never executes code from the archive.
+These are integrity/consistency checks, not authentication or fresh native
+cryptography tests. CSV assertions must remain enabled; Python `-O` is rejected.
+
+The import writes `build/ballast-dashboard/comparison.json` atomically. The C++
+viewer loads that packet, matches groups by algorithm/signer count/stage, and
+compares medians without pooling baseline and optimized samples. Configuration
+checks require matching fixtures, base/crypto commits, measurement sources,
+compiler, OpenSSL, scope, and build flags except the explicit move variant.
+Each dataset keeps its own compiled manifest hash, flags, and recorded tests.
+
+The comparison starts with cumulative requested bytes. `m` changes metrics;
+`p` opens provenance, where `r` switches between baseline and optimized sources.
+The selected row also shows allocation calls, peak, and operation-end live bytes.
+Savings are `baseline - optimized`: positive savings are labeled "less",
+negative savings are "more", and equal values are "unchanged". A nonzero result
+with a zero baseline has no percentage. Timing remains instrumented diagnostic
+data. The existing scope exclusions apply to both datasets.
+
+Concrete trace: import reads 1620 rows per variant and records 164 passing tests
+for each. For ML-DSA-44 / 32 signers / parse-only, requests are 877665 versus
+680801 B (22.4% less), calls are 598 versus 502 (16.1% less), and peak memory is
+312232 B in both. Press `m` twice from the initial requests metric to inspect
+timing, or three times to inspect the unchanged peak. None of these actions
+reruns the native benchmark.
+
+To import separately or use the C++ viewer directly inside Nix:
+
+```sh
+python3 bin/ballast_dashboard_import.py artifacts/ballast/stblob-move-experiment.zip \
+  --output build/ballast-dashboard/comparison.json
+build/ballast-dashboard/ballast_dashboard --data build/ballast-dashboard/comparison.json
+```
+
+`artifacts/ballast/stblob-move-dashboard.json` is a reproducible saved import of
+the experiment archive. Passing it with `--data` skips revalidation of the ZIP
+and CSVs; the viewer performs structural/configuration checks only. The launcher
+with `--compare` revalidates the archive before opening the viewer.
+
 ## Execution flow
 
 `Main.cpp` reads arguments and calls `loadSnapshot()`. That function parses JSON
@@ -111,3 +167,11 @@ The viewer tests cover loading recorded values, navigation without changing
 source statistics, scope labels, provenance, plain summary input, malformed
 data, control-character sanitization, narrow terminals, and zero-valued bars.
 They are separate from the baseline's recorded native cryptography tests.
+The comparison tests additionally cover identity matching, provenance separation,
+regressions, zero baselines, unchanged peaks, and incompatible input. Importer
+tests exercise the real archive and rejection of corrupted payloads, a substituted
+validator, forged summaries, and different fixtures:
+
+```sh
+python3 src/tests/libxrpl/ballast/DashboardImport.py
+```

@@ -70,7 +70,10 @@ readView(std::string id, boost::json::object const& object)
             text(entry, "stage"),
             boost::json::value_to<std::size_t>(entry.at("samples")),
             {},
-            boost::json::value_to<std::size_t>(entry.at("allocation_metric_variants"))};
+            boost::json::value_to<std::size_t>(entry.at("allocation_metric_variants")),
+            {}};
+        if (entry.contains("allocation_calls"))
+            group.allocationCalls = statistic(entry.at("allocation_calls"));
         require(
             group.algorithm == "secp256k1" || group.algorithm == "ML-DSA-44", "Unknown algorithm");
         require(
@@ -115,7 +118,76 @@ loadSnapshot(std::filesystem::path const& path)
     auto const parsed = boost::json::parse(document);
     auto const& root = parsed.as_object();
     Snapshot result;
-    if (root.contains("views"))
+    if (root.contains("kind"))
+    {
+        require(
+            text(root, "kind") == "comparison" &&
+                boost::json::value_to<int>(root.at("schema_version")) == 2,
+            "Unsupported comparison schema");
+        require(
+            text(root, "validation") == "csv_validated_at_import" &&
+                !root.at("cryptography_rerun").as_bool(),
+            "Unsupported comparison evidence");
+        auto const& datasets = root.at("datasets").as_array();
+        require(datasets.size() == 2, "Comparison needs exactly two datasets");
+        Comparison comparison{text(root, "label"), {}};
+        for (std::size_t i = 0; i < datasets.size(); ++i)
+        {
+            auto const& dataset = datasets[i].as_object();
+            require(
+                text(dataset, "id") == (i ? "move" : "baseline"), "Unexpected comparison dataset");
+            result.views.push_back(
+                readView(text(dataset, "label"), dataset.at("summary").as_object()));
+            for (auto const& group : result.views.back().groups)
+                require(group.allocationCalls.has_value(), "Missing allocation call statistics");
+            auto const& metadata = dataset.at("metadata").as_object();
+            comparison.provenance[i] = {
+                text(metadata, "candidate_commit"),
+                text(metadata, "crypto_commit"),
+                text(metadata, "measurement_source_sha256"),
+                text(metadata, "dependency_manifest_sha256"),
+                text(metadata, "build_flags"),
+                text(metadata, "compiler_id") + " " + text(metadata, "compiler_version"),
+                text(metadata, "openssl_version"),
+                boost::json::value_to<std::size_t>(dataset.at("recorded_tests_passed"))};
+        }
+        auto const& before = datasets[0].at("metadata").as_object();
+        auto const& after = datasets[1].at("metadata").as_object();
+        require(
+            text(before, "build_flags").find("stblob_move=OFF") != std::string::npos &&
+                text(after, "build_flags").find("stblob_move=ON") != std::string::npos,
+            "Unexpected baseline/optimized build variants");
+        for (auto key :
+             {"candidate_commit",
+              "crypto_commit",
+              "measurement_source_sha256",
+              "compiler_id",
+              "compiler_version",
+              "build_type",
+              "openssl_version",
+              "coverage",
+              "input_storage",
+              "samples_per_fixture_stage",
+              "warmup_iterations_per_fixture_stage"})
+            require(before.at(key) == after.at(key), "Incompatible comparison configurations");
+        require(
+            datasets[0].at("fixture_sha256").as_object().size() == 6 &&
+                datasets[0].at("fixture_sha256") == datasets[1].at("fixture_sha256"),
+            "Incompatible comparison fixtures");
+        auto normalizeFlags = [](std::string flags) {
+            for (std::string const token : {"stblob_move=ON", "stblob_move=OFF"})
+                if (auto const position = flags.find(token); position != std::string::npos)
+                    flags.replace(position, token.size(), "stblob_move=VARIANT");
+            return flags;
+        };
+        require(
+            normalizeFlags(text(before, "build_flags")) ==
+                normalizeFlags(text(after, "build_flags")),
+            "Incompatible comparison build flags");
+        result.sourceBundleHash = text(root, "source_bundle_sha256");
+        result.comparison = std::move(comparison);
+    }
+    else if (root.contains("views"))
     {
         require(
             boost::json::value_to<int>(root.at("schema_version")) == 1,
@@ -223,6 +295,8 @@ render(Snapshot const& snapshot, State const& state, std::size_t width, std::siz
             line = line.substr(0, width ? width - 1 : 0);
         return small;
     }
+    if (snapshot.comparison)
+        return renderComparison(snapshot, state, width, height);
     auto const& view = snapshot.views.at(state.view);
     auto const groups = visibleGroups(snapshot, state);
     auto const& selected = *groups.at(state.selected);

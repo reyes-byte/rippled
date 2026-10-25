@@ -11,7 +11,7 @@ get_filename_component(
 find_package(Boost REQUIRED COMPONENTS json)
 find_package(GTest REQUIRED)
 set(dashboard_data "${BALLAST_ROOT}/artifacts/ballast/dashboard.json")
-add_library(ballast.dashboard Dashboard.cpp)
+add_library(ballast.dashboard Dashboard.cpp Comparison.cpp)
 target_include_directories(ballast.dashboard PUBLIC "${CMAKE_CURRENT_LIST_DIR}")
 target_link_libraries(ballast.dashboard PUBLIC Boost::json)
 target_compile_options(ballast.dashboard PRIVATE -Wall -Wextra -Wpedantic)
@@ -19,7 +19,9 @@ add_executable(ballast_dashboard Main.cpp Terminal.cpp)
 target_link_libraries(ballast_dashboard PRIVATE ballast.dashboard)
 target_compile_definitions(
     ballast_dashboard
-    PRIVATE BALLAST_DASHBOARD_DATA="${dashboard_data}"
+    PRIVATE
+        BALLAST_DASHBOARD_DATA="${dashboard_data}"
+        BALLAST_DASHBOARD_COMPARISON_DATA="${BALLAST_ROOT}/artifacts/ballast/stblob-move-dashboard.json"
 )
 add_executable(
     ballast_dashboard_tests
@@ -31,7 +33,9 @@ target_link_libraries(
 )
 target_compile_definitions(
     ballast_dashboard_tests
-    PRIVATE BALLAST_DASHBOARD_DATA="${dashboard_data}"
+    PRIVATE
+        BALLAST_DASHBOARD_DATA="${dashboard_data}"
+        BALLAST_DASHBOARD_COMPARISON_DATA="${BALLAST_ROOT}/artifacts/ballast/stblob-move-dashboard.json"
 )
 enable_testing()
 include(GoogleTest)

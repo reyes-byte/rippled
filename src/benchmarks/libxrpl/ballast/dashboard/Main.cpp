@@ -47,6 +47,8 @@ main(int argc, char** argv)
                 throw std::invalid_argument("Unknown option or missing value");
         }
         auto const snapshot = ballast::dashboard::loadSnapshot(data);
+        if (snapshot.comparison)
+            state.metric = 1;  // Requests show the measured optimization; peak is unchanged.
         if (plain)
         {
             for (auto const& line : ballast::dashboard::render(snapshot, state))
