@@ -1,5 +1,8 @@
 # Ballast: real transaction baseline
 
+For teammate setup, saved results, and one-command reproduction, start with
+[the hackathon handoff](../../../../HANDOFF.md).
+
 This follows the supplied Ballast PDF as a revised measurement brief. The
 existing `../pqc` standalone ownership microbenchmark is preserved. Further
 optimization work is paused.

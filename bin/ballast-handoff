@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+repo_dir="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+if [[ -z "${IN_NIX_SHELL:-}" ]]; then
+    exec nix develop "${repo_dir}#gcc" --command bash "$repo_dir/bin/ballast-handoff" "$@"
+fi
+cd "$repo_dir"
+
+work_dir="$repo_dir/build/ballast-handoff"
+sample_count=30
+warmup_count=3
+run_count=3
+build_jobs=2
+while (( $# )); do
+    case "$1" in
+        --help)
+            printf '%s\n' 'Usage: bash bin/ballast-handoff [--work-dir DIR] [--samples N] [--warmup N] [--runs N] [--jobs N]'
+            exit 0
+            ;;
+        --work-dir|--samples|--warmup|--runs|--jobs)
+            [[ $# -ge 2 ]] || { printf 'Missing value for %s\n' "$1" >&2; exit 1; }
+            case "$1" in
+                --work-dir) work_dir="$2" ;;
+                --samples) sample_count="$2" ;;
+                --warmup) warmup_count="$2" ;;
+                --runs) run_count="$2" ;;
+                --jobs) build_jobs="$2" ;;
+            esac
+            shift 2
+            ;;
+        *) printf 'Unknown option: %s\n' "$1" >&2; exit 1 ;;
+    esac
+done
+for count in "$sample_count" "$warmup_count" "$run_count" "$build_jobs"; do
+    [[ "$count" =~ ^[1-9][0-9]*$ && ${#count} -le 6 ]] || {
+        printf 'Counts must be positive integers with at most six digits\n' >&2
+        exit 1
+    }
+done
+for command in git python3 conan cmake; do
+    command -v "$command" >/dev/null || { printf 'Missing command: %s\n' "$command" >&2; exit 1; }
+done
+mkdir -p "$work_dir/runs"
+work_dir="$(cd "$work_dir" && pwd -P)"
+run_dir="$(python3 -c 'import pathlib,sys,tempfile,time; print(tempfile.mkdtemp(prefix=time.strftime("%Y%m%dT%H%M%SZ-",time.gmtime()),dir=sys.argv[1]))' "$work_dir/runs")"
+mkdir -p "$run_dir/results" "$run_dir/logs"
+printf 'Ballast handoff run: %s\n' "$run_dir"
+
+mapfile -t pins < <(python3 - "$repo_dir/src/benchmarks/libxrpl/ballast/pq/pins.json" <<'PY'
+import json,sys
+p=json.load(open(sys.argv[1]))
+for value in [p['candidate']['repository'],p['candidate']['commit'],p['reference']['repository'],p['reference']['commit'],p['reference']['upstream_commit']]:
+    print(value)
+PY
+)
+[[ ${#pins[@]} -eq 5 ]] || { printf 'Invalid revision pins\n' >&2; exit 1; }
+
+checkout_pin() {
+    local url="$1" revision="$2" directory="$3"
+    shift 3
+    if [[ ! -e "$directory" ]]; then
+        mkdir -p "$directory"
+        git -C "$directory" init --quiet
+        git -C "$directory" remote add origin "$url"
+        git -C "$directory" fetch --quiet --depth 1 origin "$revision"
+        git -C "$directory" checkout --quiet --detach FETCH_HEAD
+    fi
+    [[ -d "$directory/.git" ]] || { printf 'Not a checkout: %s\n' "$directory" >&2; exit 1; }
+    [[ "$(git -C "$directory" rev-parse HEAD)" == "$revision" ]] || {
+        printf 'Wrong revision in %s; use a new work directory\n' "$directory" >&2
+        exit 1
+    }
+    [[ -z "$(git -C "$directory" status --porcelain --untracked-files=no)" ]] || {
+        printf 'Tracked edits in %s; use a new work directory\n' "$directory" >&2
+        exit 1
+    }
+    for extra in "$@"; do
+        if ! git -C "$directory" cat-file -e "${extra}^{commit}" 2>/dev/null; then
+            git -C "$directory" fetch --quiet --depth 1 "$url" "$extra"
+        fi
+    done
+}
+
+printf 'Fetching/verifying the pinned source checkouts...\n'
+checkout_pin "${pins[0]}" "${pins[1]}" "$work_dir/checkouts/candidate"
+checkout_pin "${pins[2]}" "${pins[3]}" "$work_dir/checkouts/crypto" "${pins[4]}"
+printf 'Installing the locked dependency subset; log: %s\n' "$run_dir/logs/conan.log"
+conan install src/benchmarks/libxrpl/ballast \
+    --output-folder "$work_dir/dependencies" --lockfile conan.lock --build missing \
+    --settings build_type=Release --settings:build build_type=Release \
+    --conf "tools.build:jobs=$build_jobs" --conf:build "tools.build:jobs=$build_jobs" \
+    > "$run_dir/logs/conan.log" 2>&1
+cmake -S src/benchmarks/libxrpl/ballast/pq/native -B "$work_dir/native" \
+    -DCMAKE_TOOLCHAIN_FILE="$work_dir/dependencies/conan_toolchain.cmake" \
+    -DCMAKE_BUILD_TYPE=Release -DCMAKE_UNITY_BUILD=ON -DCMAKE_UNITY_BUILD_BATCH_SIZE=15 \
+    -DBALLAST_PQ_CANDIDATE="$work_dir/checkouts/candidate" \
+    -DBALLAST_PQ_REFERENCE="$work_dir/checkouts/crypto" \
+    > "$run_dir/logs/configure.log" 2>&1
+printf 'Building the protocol subset and tests...\n'
+cmake --build "$work_dir/native" --parallel "$build_jobs" 2>&1 | tee "$run_dir/logs/build.log"
+ctest --test-dir "$work_dir/native" --output-on-failure 2>&1 | tee "$run_dir/logs/ctest.log"
+for (( i=1; i<=run_count; ++i )); do
+    printf 'Collecting fresh-process run %s/%s...\n' "$i" "$run_count"
+    "$work_dir/native/xrpl.ballast_measure" --samples "$sample_count" --warmup "$warmup_count" \
+        --run-id "run-$i" --metadata "$run_dir/results/run-$i.json" \
+        > "$run_dir/results/run-$i.csv"
+done
+python3 src/benchmarks/libxrpl/ballast/measurement/validate_csv.py \
+    "$run_dir"/results/run-*.csv > "$run_dir/results/summary.json"
+cp "$work_dir/native/source-sha256.txt" "$run_dir/results/"
+cp "$work_dir/native/accounting/accounting-source-sha256.txt" "$run_dir/results/"
+cp src/benchmarks/libxrpl/ballast/pq/pins.json "$run_dir/results/"
+python3 bin/ballast_bundle.py create --results "$run_dir/results" --output "$run_dir/bundle" \
+    --ctest-log "$run_dir/logs/ctest.log"
+python3 bin/ballast_bundle.py archive "$run_dir/bundle" --output "$run_dir/ballast-handoff.zip"
+printf 'Verified results: %s\nVerified bundle: %s\n' "$run_dir/results/summary.json" "$run_dir/ballast-handoff.zip"
