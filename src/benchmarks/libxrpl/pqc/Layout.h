@@ -31,6 +31,33 @@ struct OwnedFields
     views() const;
 };
 
+// Copies share storage; edits detach only the field being changed.
+class SharedFields
+{
+    std::shared_ptr<Bytes const> owner_;
+    Fields fields_{};
+    std::shared_ptr<Bytes> publicKey_;
+    std::shared_ptr<Bytes> signature_;
+
+    SharedFields(std::shared_ptr<Bytes const> owner, Fields fields);
+    friend SharedFields
+    parseShared(std::shared_ptr<Bytes const> owner, std::size_t offset, std::size_t bytes);
+
+public:
+    SharedFields() = default;
+
+    // Views borrow storage. Reacquire them after editing this wrapper.
+    [[nodiscard]] Fields
+    views() const;
+
+    // Bounds-checked, fixed-size edits; no mutable spans escape the wrapper.
+    void
+    setPublicKeyByte(std::size_t index, unsigned char value);
+
+    void
+    setSignatureByte(std::size_t index, unsigned char value);
+};
+
 struct ParseStats
 {
     std::size_t payloadAllocations = 0;
@@ -44,6 +71,13 @@ appendField(Bytes& output, View field);
 // Input must remain alive and immutable until the returned views are unused.
 Fields
 parseViews(View input);
+
+// The owner must have no mutable aliases. Rejects null owners and invalid ranges.
+SharedFields
+parseShared(
+    std::shared_ptr<Bytes const> owner,
+    std::size_t offset = 0,
+    std::size_t bytes = std::dynamic_extent);
 
 // Models STBlob/getVLBuffer ownership: one exact-size allocation and memcpy
 // per nonempty field. Counters exclude input storage and crypto internals.

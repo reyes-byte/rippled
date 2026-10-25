@@ -20,3 +20,9 @@ target_link_libraries(
 xrpl_add_benchmark(nodestore)
 target_link_libraries(xrpl.bench.nodestore PRIVATE xrpl.imports.bench)
 add_dependencies(xrpl.benchmarks xrpl.bench.nodestore)
+
+# Ballast starts with a focused real-protocol smoke test, before instrumentation.
+option(ballast "Build the local Ballast transaction baseline" OFF)
+if(ballast)
+    add_subdirectory(ballast)
+endif()

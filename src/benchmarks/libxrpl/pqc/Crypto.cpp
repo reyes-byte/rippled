@@ -10,6 +10,7 @@
 #include <random>
 #include <sstream>
 #include <stdexcept>
+#include <utility>
 
 namespace pqc_bench {
 namespace {
@@ -114,6 +115,29 @@ makeFixture(std::string const& algorithm, std::size_t messageBytes, std::uint32_
     appendField(fixture.encoded, signature);
     require(verify(algorithm, fixture.message, parseViews(fixture.encoded)), "verify new fixture");
     return fixture;
+}
+
+SignerWorkload
+makeSignerWorkload(
+    std::string const& algorithm,
+    std::size_t messageBytes,
+    std::uint32_t seed,
+    std::size_t signerCount)
+{
+    if (!signerCount || signerCount > kMaxSigners)
+        throw std::invalid_argument("signer count must be between 1 and 32");
+    SignerWorkload workload;
+    workload.signers.reserve(signerCount);
+    Bytes wire;
+    for (std::size_t i = 0; i < signerCount; ++i)
+    {
+        auto fixture = makeFixture(algorithm, messageBytes, static_cast<std::uint32_t>(seed + i));
+        workload.signers.push_back(
+            {wire.size(), fixture.encoded.size(), std::move(fixture.message)});
+        wire.insert(wire.end(), fixture.encoded.begin(), fixture.encoded.end());
+    }
+    workload.wire = std::make_shared<Bytes const>(std::move(wire));
+    return workload;
 }
 
 bool

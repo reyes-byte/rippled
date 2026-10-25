@@ -1,0 +1,53 @@
+{
+  "algorithm": "ML-DSA-44",
+  "signer_count": 8,
+  "signer_namespace": "ballast/ml-dsa-44/multisign/v1",
+  "account": "rpUCWY3vyzhscoHvgSgFRcJtqp9oTPUSUz",
+  "first_signer_account": "r3Ju896RA1QBNVdqMy66eakf8zwqJumjzc",
+  "shared_signing_hex": "534D54001200032280000000240000000168400000000000000A730081140D2CD8E6C74D663C1D3E4F33D94922A3D76DE706",
+  "shared_signing_bytes": 50,
+  "per_signer_signing_bytes": 70,
+  "wire_bytes": 30152,
+  "public_key_bytes_per_signer": 1312,
+  "total_signature_bytes": 19360,
+  "signature_lengths": [
+    2420,
+    2420,
+    2420,
+    2420,
+    2420,
+    2420,
+    2420,
+    2420
+  ],
+  "transaction_id": "26B52BED7DD43716DDD6E99E8687FD6A1420F02AA29F296808493A175767A489",
+  "candidate_commit": "779859c8afa324d34d16e42028af8d2ceb5fcc8e",
+  "reference_commit": "3032292cfd4d94e0df9bd49a0098669ca9166aa1",
+  "schema": 1,
+  "fixture_id": "ballast/native/multisign/v1/ml-dsa-44-8",
+  "credentials": "public_test_material_never_use_for_funds",
+  "signing_mode": "multi",
+  "transaction_type": "AccountSet",
+  "owner_seed_recipe": "secp256k1: ballast/secp256k1/multisign/v1/account",
+  "signer_seed_recipe": "ballast/ml-dsa-44/multisign/v1/signer/i (decimal i, 0 through signer_count-1)",
+  "sequence": 1,
+  "fee_drops": 10,
+  "fee_role": "fixture_constant",
+  "rules": [
+    "featureQuantum"
+  ],
+  "build_scope": "candidate_protocol_source_subset",
+  "signing_randomness": "native_xrpl_cryptoPrng",
+  "reproduction": "replay_saved_wire_fixture",
+  "wire_sha256": "7c23f0e70891150d4cebbb47ea075f7002923312523030260c79b114dc58da2d",
+  "hex_file_sha256": "23bf5e66ef3da51cb9746980d8be4c108b3ae2582122a64fb11bfb85c9104110",
+  "total_public_key_bytes": 10496,
+  "signature_checked_by": [
+    "native_STTx_checkSign",
+    "OpenSSL_default_provider_3.6.3"
+  ],
+  "ledger_authorization": "not_checked",
+  "fee_validation": "not_checked",
+  "memory": "not_measured",
+  "production_claim": false
+}

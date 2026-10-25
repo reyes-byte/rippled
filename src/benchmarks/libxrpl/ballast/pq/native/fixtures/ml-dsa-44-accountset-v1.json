@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "algorithm": "ML-DSA-44",
+  "signing_mode": "single",
+  "signer_count": 1,
+  "transaction_type": "AccountSet",
+  "passphrase": "ballast/ml-dsa-44/accountset/v1",
+  "credentials": "public_test_material_never_use_for_funds",
+  "candidate_commit": "779859c8afa324d34d16e42028af8d2ceb5fcc8e",
+  "reference_commit": "3032292cfd4d94e0df9bd49a0098669ca9166aa1",
+  "build_scope": "candidate_protocol_source_subset",
+  "signing_randomness": "native_xrpl_cryptoPrng",
+  "reproduction": "replay_committed_wire_fixture; fresh_signing_is_randomized",
+  "account": "r355VRk4DahGVPRN5Td4SqmhjB2hA1kt4s",
+  "sequence": 1,
+  "fee_drops": 10,
+  "rules": [
+    "featureQuantum"
+  ],
+  "transaction_id": "AD4DA4CA47257A6A6E3D66060433374B7F14D04CEA8872291727A5DE89C640D7",
+  "wire_bytes": 3782,
+  "wire_sha256": "d7fcc49c78df08883a7f412935e91ad9a5e7dbc6de02282536c1ee576f6a795c",
+  "hex_file_sha256": "2efa5544c37d7a29985ccb1f5dd6bcdc3ecc41f9bb228561aace972d40fcd005",
+  "public_key_bytes": 1312,
+  "public_key_object_bytes": 1320,
+  "signature_bytes": 2420,
+  "signing_payload_bytes": 1363,
+  "signature_checked_by": [
+    "native_STTx_checkSign",
+    "OpenSSL_default_provider_3.6.3"
+  ],
+  "ledger_authorization": "not_checked",
+  "fee_validation": "not_checked",
+  "memory": "not_measured",
+  "production_claim": false
+}

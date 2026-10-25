@@ -1,0 +1,13 @@
+{
+  "candidate": {
+    "repository": "https://github.com/Transia-RnD/rippled.git",
+    "branch": "dilithium-full",
+    "commit": "779859c8afa324d34d16e42028af8d2ceb5fcc8e"
+  },
+  "reference": {
+    "repository": "https://github.com/Transia-RnD/dilithium.git",
+    "commit": "3032292cfd4d94e0df9bd49a0098669ca9166aa1",
+    "upstream_commit": "444cdcc84eb36b66fe27b3a2529ee48f6d8150c2"
+  },
+  "openssl_version": "3.6.3"
+}

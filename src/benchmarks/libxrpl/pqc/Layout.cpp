@@ -2,6 +2,7 @@
 
 #include <cstring>
 #include <stdexcept>
+#include <utility>
 
 namespace pqc_bench {
 namespace {
@@ -75,12 +76,51 @@ copyField(View input, ParseStats* stats)
     return output;
 }
 
+void
+setByte(View current, std::shared_ptr<Bytes>& owned, std::size_t index, unsigned char value)
+{
+    if (index >= current.size())
+        throw std::out_of_range("field byte index out of range");
+    // First edit copies the wire field. Editing a copied wrapper detaches again
+    // if its materialized field is shared; otherwise reuse the existing storage.
+    if (!owned || owned.use_count() > 1)
+        owned = std::make_shared<Bytes>(current.begin(), current.end());
+    (*owned)[index] = value;
+}
+
 }  // namespace
 
 Fields
 OwnedFields::views() const
 {
     return {{publicKey.get(), publicKeyBytes}, {signature.get(), signatureBytes}};
+}
+
+SharedFields::SharedFields(std::shared_ptr<Bytes const> owner, Fields fields)
+    : owner_(std::move(owner)), fields_(fields)
+{
+}
+
+Fields
+SharedFields::views() const
+{
+    if (!owner_)
+        return {};
+    return {
+        publicKey_ ? View(*publicKey_) : fields_.publicKey,
+        signature_ ? View(*signature_) : fields_.signature};
+}
+
+void
+SharedFields::setPublicKeyByte(std::size_t index, unsigned char value)
+{
+    setByte(views().publicKey, publicKey_, index, value);
+}
+
+void
+SharedFields::setSignatureByte(std::size_t index, unsigned char value)
+{
+    setByte(views().signature, signature_, index, value);
 }
 
 void
@@ -115,6 +155,22 @@ parseViews(View input)
     auto const signature = reader.field();
     reader.finish();
     return {publicKey, signature};
+}
+
+SharedFields
+parseShared(std::shared_ptr<Bytes const> owner, std::size_t offset, std::size_t bytes)
+{
+    if (!owner)
+        throw std::invalid_argument("null wire buffer owner");
+    if (offset > owner->size())
+        throw std::out_of_range("wire buffer offset out of range");
+    auto const remaining = owner->size() - offset;
+    if (bytes == std::dynamic_extent)
+        bytes = remaining;
+    if (bytes > remaining)
+        throw std::out_of_range("wire buffer length out of range");
+    auto const fields = parseViews(View(*owner).subspan(offset, bytes));
+    return SharedFields(std::move(owner), fields);
 }
 
 OwnedFields

@@ -1,0 +1,28 @@
+#pragma once
+
+#include <array>
+#include <string_view>
+
+namespace ballast::measurement::build {
+
+inline constexpr std::string_view candidateCommit = "@candidate_commit@";
+inline constexpr std::string_view cryptoCommit = "@reference_commit@";
+inline constexpr std::string_view sourceHash = "@measurement_source_hash@";
+inline constexpr std::string_view dependencyManifestHash = "@measurement_dependency_hash@";
+inline constexpr std::string_view compiler = R"ballast(@CMAKE_CXX_COMPILER_ID@)ballast";
+inline constexpr std::string_view compilerVersion = R"ballast(@CMAKE_CXX_COMPILER_VERSION@)ballast";
+inline constexpr std::string_view buildType = R"ballast(@CMAKE_BUILD_TYPE@)ballast";
+inline constexpr std::string_view flags = R"ballast(@CMAKE_CXX_FLAGS@ @CMAKE_CXX_FLAGS_RELEASE@; std=c++23; protocol_unity=@CMAKE_UNITY_BUILD@; unity_batch=@CMAKE_UNITY_BUILD_BATCH_SIZE@; measurement_ipo=OFF)ballast";
+inline constexpr std::string_view fixtureDirectory = R"ballast(@measurement_fixture_directory@)ballast";
+
+struct FixtureFingerprint
+{
+    std::string_view slug;
+    std::string_view metadataSha256;
+    std::string_view hexSha256;
+};
+inline constexpr std::array<FixtureFingerprint, 6> fixtures{{
+@measurement_fixture_records@
+}};
+
+}  // namespace ballast::measurement::build
